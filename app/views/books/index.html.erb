@@ -1,0 +1,10 @@
+<section id="books">
+  <h3>All Books</h3>
+
+  <% @books.each do |book| %>
+    <p><%= book.title %></p>
+    <p><%= book.author %></p>
+    <p><%= book.pages %></p>
+    <p><%= book.year_published %></p>
+  <% end %>
+</section>
