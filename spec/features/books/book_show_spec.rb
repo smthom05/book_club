@@ -14,9 +14,6 @@ RSpec.describe 'when a visitor visits a book show page' do
     expect(page).to have_content("Pages: #{book_1.pages}")
     expect(page).to have_content("Year Published: #{book_1.year_published}")
     expect(page).to_not have_content("Title: #{book_2.title}")
-    expect(page).to_not have_content("Author(s): #{book_2.authors.first.name}")
-    expect(page).to_not have_content("Pages: #{book_2.pages}")
-    expect(page).to_not have_content("Year Published: #{book_2.year_published}")
   end
 
   it 'shows a list of reviews for a specific book' do

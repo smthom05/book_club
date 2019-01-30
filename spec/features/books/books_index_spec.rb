@@ -7,10 +7,9 @@ RSpec.describe 'when a visitor visits the books index page' do
     book_1 = author_1.books.create(title: "Lord of the Rings", pages: 1000, year_published: 1955)
     book_2 = author_2.books.create(title: "The Prisoner of Azkaban", pages: 400, year_published: 1999)
     book_3 = Book.create(title: "LOTR MEETS HARRY POTTER", authors: [author_1, author_2], pages: 500, year_published: 2019)
-    visit '/books'
+    visit books_path
 
     within '#books' do
-      expect(page).to have_content("All Books")
       within "#book-#{book_1.id}" do
         expect(page).to have_content(book_1.title)
         expect(page).to have_content(book_1.authors.first.name)
