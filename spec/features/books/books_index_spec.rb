@@ -31,4 +31,17 @@ RSpec.describe 'when a visitor visits the books index page' do
       end
     end
   end
+
+  it 'can click on a link and go to the show page for that book' do
+    author_1 = Author.create(name: "JRR Tolkien")
+    author_2 = Author.create(name: "JK Rowling")
+    book_1 = author_1.books.create(title: "Lord of the Rings", pages: 1000, year_published: 1955)
+    book_2 = author_2.books.create(title: "The Prisoner of Azkaban", pages: 400, year_published: 1999)
+
+    visit books_path
+
+    click_link(book_1.title)
+
+    expect(current_path).to eq(book_path(book_1))
+  end
 end
