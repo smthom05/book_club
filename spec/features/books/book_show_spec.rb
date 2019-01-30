@@ -28,7 +28,7 @@ RSpec.describe 'when a visitor visits a book show page' do
     review_2 = user_2.reviews.create(title: "Crappy Book!", text: "This book had nothing good about it. Stay Away!", rating: 1, book: book_1)
 
     visit "/books/#{book_1.id}"
-  
+
     within "#review-#{review_1.id}" do
       expect(page).to have_content("Title: #{review_1.title}")
       expect(page).to have_content("User Name: #{user_1.name}")
