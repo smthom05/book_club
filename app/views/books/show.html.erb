@@ -1,6 +1,21 @@
 <section id="book-<%= @book.id %>">
   <p>Title: <%= @book.title %></p>
-  <p>Author(s): <%= @book.author %></p>
+  <p>Author(s):
+    <% @book.authors.each do |author| %>
+      <%= author.name %>
+    <% end %>
+  </p>
   <p>Pages: <%= @book.pages %></p>
   <p>Year Published: <%= @book.year_published %></p>
+
+  <% @book.reviews.each do |review| %>
+    <section id="review-<%= review.id %>">
+      <p>Title:  <%= review.title %> </p>
+      <p>User Name:  <%= review.user.name %> </p>
+      <p>Rating:  <%= review.rating %> </p>
+      <p>Text:  <%= review.text %> </p>
+    </section>
+  <% end %>
+
+
 </section>
