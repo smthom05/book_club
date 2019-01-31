@@ -1,9 +1,17 @@
+<% if @book.errors %>
+<ul id="errors">
+  <% @book.errors.full_messages.each do |message| %>
+  <li><%= message %></li>
+  <% end %>
+</ul>
+<% end %>
+
 <%= form_for @book do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>
 
-  <%= f.label :authors %>
-  <%= f.text_field :authors %>
+  <p>Author(s):</p>
+  <input type="text" value="" name="book[authors]" id="book_authors">
 
   <%= f.label :pages %>
   <%= f.text_field :pages %>

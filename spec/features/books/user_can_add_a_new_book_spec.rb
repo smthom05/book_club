@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe 'When the user clicks on new book button', type: :feature do
   it 'sends user to a new book form page' do
     visit books_path
@@ -29,19 +31,38 @@ RSpec.describe 'When the user clicks on new book button', type: :feature do
         expect(page).to_not have_content(book_1.title)
       end
 
-     xit 'should render the form again if fields are empty' do
+     it 'should render the form again if fields are empty' do
         visit new_book_path
 
         fill_in "book[title]", with: "The Wizard of Oz"
-        fill_in "book[authors]", with: ""
         fill_in "book[pages]", with: 100
         fill_in "book[year_published]", with: 1900
 
         click_button 'Create Book'
 
         expect(page).to have_button('Create Book')
-        expect(page).to have_field("Title", with: "")
+        expect(page).to have_field("book[title]")
       end
+
+      it 'should render the form again if fields are empty' do
+         visit new_book_path
+
+         click_button 'Create Book'
+
+         expect(page).to have_button('Create Book')
+         expect(page).to have_field("book[title]")
+         within "#errors"
+            ["Title can't be blank",
+             "Authors can't be blank",
+             "Pages can't be blank",
+
+             "Pages is not a number",
+             "Year published can't be blank",
+             "Year published is not a number"].each do |msg|
+
+           expect(page).to have_content(msg)
+         end
+       end
     end
   end
 end

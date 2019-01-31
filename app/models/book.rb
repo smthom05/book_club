@@ -4,6 +4,7 @@ class Book < ApplicationRecord
   has_many :reviews
 
   validates_presence_of :title
+  validates_presence_of :authors
   validates :pages, presence: true, numericality: {
     greater_than: 0
   }

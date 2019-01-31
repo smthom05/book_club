@@ -4,8 +4,8 @@ RSpec.describe 'when a visitor visits the books index page' do
   it 'can see all books' do
     author_1 = Author.create(name: "JRR Tolkien")
     author_2 = Author.create(name: "JK Rowling")
-    book_1 = author_1.books.create(title: "Lord of the Rings", pages: 1000, year_published: 1955, image_url: "https://upload.wikimedia.org/wikipedia/en/e/e9/First_Single_Volume_Edition_of_The_Lord_of_the_Rings.gif")
-    book_2 = author_2.books.create(title: "The Prisoner of Azkaban", pages: 400, year_published: 1999, image_url: "https://images-na.ssl-images-amazon.com/images/I/81lAPl9Fl0L.jpg")
+    book_1 = Book.create(authors: [author_1], title: "Lord of the Rings", pages: 1000, year_published: 1955, image_url: "https://upload.wikimedia.org/wikipedia/en/e/e9/First_Single_Volume_Edition_of_The_Lord_of_the_Rings.gif")
+    book_2 = Book.create(authors: [author_2], title: "The Prisoner of Azkaban", pages: 400, year_published: 1999, image_url: "https://images-na.ssl-images-amazon.com/images/I/81lAPl9Fl0L.jpg")
     book_3 = Book.create(title: "LOTR MEETS HARRY POTTER", authors: [author_1, author_2], pages: 500, year_published: 2019, image_url: "https://upload.wikimedia.org/wikipedia/en/e/e9/First_Single_Volume_Edition_of_The_Lord_of_the_Rings.gif")
     visit books_path
 
@@ -38,8 +38,8 @@ RSpec.describe 'when a visitor visits the books index page' do
   it 'can click on a link and go to the show page for that book' do
     author_1 = Author.create(name: "JRR Tolkien")
     author_2 = Author.create(name: "JK Rowling")
-    book_1 = author_1.books.create(title: "Lord of the Rings", pages: 1000, year_published: 1955)
-    book_2 = author_2.books.create(title: "The Prisoner of Azkaban", pages: 400, year_published: 1999)
+    book_1 = Book.create(authors: [author_1], title: "Lord of the Rings", pages: 1000, year_published: 1955)
+    book_2 = Book.create(authors: [author_2], title: "The Prisoner of Azkaban", pages: 400, year_published: 1999)
 
     visit books_path
 
