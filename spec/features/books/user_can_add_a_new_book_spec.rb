@@ -39,8 +39,6 @@ RSpec.describe 'When the user clicks on new book button', type: :feature do
 
         click_button 'Create Book'
 
-        save_and_open_page
-
         expect(page).to have_button('Create Book')
         expect(page).to have_field("Title", with: "")
       end

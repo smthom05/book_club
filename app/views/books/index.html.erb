@@ -4,6 +4,7 @@
   <% @books.each do |book| %>
     <section id="book-<%= book.id %>">
       <p><%= link_to book.title, book_path(book) %></p>
+      <img src="<%= book.image_url %>" alt="<%= book.title %>">
 
       <% book.authors.each do |author|%>
         <p> <%= author.name %> </p>
