@@ -4,8 +4,8 @@ RSpec.describe 'when a visitor visits a book show page' do
   it 'shows the title, author(s), number of pages, and year_published' do
     author_1 = Author.create(name: "JRR Tolkien")
     author_2 = Author.create(name: "JK Rowling")
-    book_1 = author_1.books.create(title: "Lord of the Rings", pages: 1000, year_published: 1955)
-    book_2 = author_2.books.create(title: "The Prisoner of Azkaban", pages: 400, year_published: 1999)
+    book_1 = author_1.books.create(title: "Lord of the Rings", pages: 1000, year_published: 1955, image_url: "https://upload.wikimedia.org/wikipedia/en/e/e9/First_Single_Volume_Edition_of_The_Lord_of_the_Rings.gif")
+    book_2 = author_2.books.create(title: "The Prisoner of Azkaban", pages: 400, year_published: 1999, image_url: "https://images-na.ssl-images-amazon.com/images/I/81lAPl9Fl0L.jpg")
 
     visit book_path(book_1)
 
@@ -13,6 +13,7 @@ RSpec.describe 'when a visitor visits a book show page' do
     expect(page).to have_content("Author(s): #{book_1.authors.first.name}")
     expect(page).to have_content("Pages: #{book_1.pages}")
     expect(page).to have_content("Year Published: #{book_1.year_published}")
+    expect(page).to have_css("img[src*='#{book_1.image_url}']")
     expect(page).to_not have_content("Title: #{book_2.title}")
   end
 
