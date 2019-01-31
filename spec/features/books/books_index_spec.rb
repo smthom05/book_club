@@ -7,10 +7,9 @@ RSpec.describe 'when a visitor visits the books index page' do
     book_1 = author_1.books.create(title: "Lord of the Rings", pages: 1000, year_published: 1955)
     book_2 = author_2.books.create(title: "The Prisoner of Azkaban", pages: 400, year_published: 1999)
     book_3 = Book.create(title: "LOTR MEETS HARRY POTTER", authors: [author_1, author_2], pages: 500, year_published: 2019)
-    visit '/books'
+    visit books_path
 
     within '#books' do
-      expect(page).to have_content("All Books")
       within "#book-#{book_1.id}" do
         expect(page).to have_content(book_1.title)
         expect(page).to have_content(book_1.authors.first.name)
@@ -31,5 +30,18 @@ RSpec.describe 'when a visitor visits the books index page' do
         expect(page).to have_content(book_3.year_published)
       end
     end
+  end
+
+  it 'can click on a link and go to the show page for that book' do
+    author_1 = Author.create(name: "JRR Tolkien")
+    author_2 = Author.create(name: "JK Rowling")
+    book_1 = author_1.books.create(title: "Lord of the Rings", pages: 1000, year_published: 1955)
+    book_2 = author_2.books.create(title: "The Prisoner of Azkaban", pages: 400, year_published: 1999)
+
+    visit books_path
+
+    click_link(book_1.title)
+
+    expect(current_path).to eq(book_path(book_1))
   end
 end

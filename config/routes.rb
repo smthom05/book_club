@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
-  get '/books', to: "books#index"
-  get '/books/:id', to: "books#show"
+  root 'welcome#index'
+
+  resources :books
 end
