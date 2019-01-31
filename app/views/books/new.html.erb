@@ -6,6 +6,10 @@
 </ul>
 <% end %>
 
+<% if @error_msg %>
+  <h1> <%= @error_msg %> </h1>
+<% end %>
+
 <%= form_for @book do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>
@@ -14,10 +18,13 @@
   <input type="text" value="" name="book[authors]" id="book_authors">
 
   <%= f.label :pages %>
-  <%= f.text_field :pages %>
+  <%= f.number_field :pages %>
 
   <%= f.label :year_published %>
-  <%= f.text_field :year_published %>
+  <%= f.number_field :year_published %>
+
+  <%= f.label :image_url %>
+  <%= f.text_field :image_url %>
 
   <%= f.submit %>
 <% end %>
