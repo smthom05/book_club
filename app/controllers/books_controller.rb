@@ -12,10 +12,17 @@ class BooksController < ApplicationController
   end
 
   def create
-    author_1 = Author.new(name: book_params[:authors])
-    @book = author_1.books.new(title: book_params[:title], pages: book_params[:pages], year_published: book_params[:year_published])
-    if author_1.save
-      @book.save
+    bp = book_params
+    author_list = bp[:authors]
+    authors = []
+    author_list.split(',').each do |author|
+      author = author.titleize.strip
+      author_1 = Author.find_or_create_by(name: author)
+      authors << author_1
+    end
+    bp[:authors] = authors
+    @book = Book.new(bp)
+    if @book.save
       redirect_to book_path(@book)
     else
       render :new

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190131001958) do
+ActiveRecord::Schema.define(version: 20190131202640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,9 +19,7 @@ ActiveRecord::Schema.define(version: 20190131001958) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "book_author_id"
     t.string "image_url"
-    t.index ["book_author_id"], name: "index_authors_on_book_author_id"
   end
 
   create_table "book_authors", force: :cascade do |t|
@@ -37,9 +35,7 @@ ActiveRecord::Schema.define(version: 20190131001958) do
     t.integer "year_published"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "book_author_id"
     t.string "image_url"
-    t.index ["book_author_id"], name: "index_books_on_book_author_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -60,10 +56,8 @@ ActiveRecord::Schema.define(version: 20190131001958) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "authors", "book_authors"
   add_foreign_key "book_authors", "authors"
   add_foreign_key "book_authors", "books"
-  add_foreign_key "books", "book_authors"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
 end
