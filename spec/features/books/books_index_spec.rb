@@ -10,7 +10,7 @@ RSpec.describe 'when a visitor visits the books index page' do
     user = User.create(name: "user")
     @review_1 = @book_1.reviews.create(title: "Review 1", rating: 5, text: "Fake", user: user)
     @review_2 = @book_1.reviews.create(title: "Review 2", rating: 1, text: "Other", user: user)
-    @review_3 = @book_2.reviews.create(title: "Review 1 Book 2", rating: 4, text: "Faker", user: user)
+    @review_3 = @book_2.reviews.create(title: "Review 1 Book 2", rating: 5, text: "Faker", user: user)
     @review_4 = @book_2.reviews.create(title: "Review 2 Book 2", rating: 2, text: "Fakest", user: user)
   end
 
@@ -71,7 +71,18 @@ RSpec.describe 'when a visitor visits the books index page' do
     end
   end
 
-  # it 'shows me a link to sort the books by average rating in ascending order'
+  it 'shows me a link to sort the books by average rating in ascending order' do
+    visit books_path
+
+    expect(page).to have_link("Average Rating Ascending")
+
+    click_link("Average Rating Ascending")
+
+    expect(page.all('.individual-book')[0]).to have_content("Prisoner of Azkaban")
+    expect(page.all('.individual-book')[1]).to have_content('Lord of the Rings')
+    expect(page.all('.individual-book')[2]).to have_content('LOTR MEETS HARRY POTTER')
+
+  end
 end
 
 # As a Visitor,

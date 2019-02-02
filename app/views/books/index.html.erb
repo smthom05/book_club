@@ -1,8 +1,13 @@
+<nav id="sorting-links">
+  <%= link_to "Average Rating Ascending", books_path(sort: "ratings", order: "asc") %>
+</nav>
+
 <section id="books">
   <h3>All Books</h3>
 
   <% @books.each do |book| %>
-    <section id="book-<%= book.id %>">
+
+    <section class="individual-book" id="book-<%= book.id %>">
       <p><%= link_to book.title, book_path(book) %></p>
       <img src="<%= book.image_url %>" alt="<%= book.title %>">
 

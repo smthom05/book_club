@@ -1,6 +1,10 @@
 class BooksController < ApplicationController
   def index
+    # binding.pry
+    # case params[:sort]
+    # when 'ratings' then @books = Books.by_rating(params[:order])
     @books = Book.all
+
   end
 
   def show
