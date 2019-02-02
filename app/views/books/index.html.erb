@@ -10,8 +10,10 @@
         <p> <%= author.name %> </p>
       <% end %>
 
-      <p><%= book.pages %></p>
-      <p><%= book.year_published %></p>
+      <p>Page Count: <%= book.pages %></p>
+      <p>Year Published: <%= book.year_published %></p>
+      <p>Average Rating: <%= book.average_rating %></p>
+      <p>Number of reviews: <%= book.number_of_reviews %></p>
     </section>
   <% end %>
 </section>
