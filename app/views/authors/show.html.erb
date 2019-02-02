@@ -1,0 +1,13 @@
+<h3><%= @author.name %></h3>
+
+<% @author.books.each do |book| %>
+  <section id="book-<%= book.id %>">
+    <p><%= book.title %></p>
+    <img src="<%= book.image_url %>" alt="<%= book.id %>">
+    <% book.authors.each do |author| %>
+      <p><%= author.name unless author.name == @author.name %></p>
+    <% end %>
+    <p>Page Count: <%= book.pages %></p>
+    <p>Year Published: <%= book.year_published %></p>
+  </section>
+<% end %>

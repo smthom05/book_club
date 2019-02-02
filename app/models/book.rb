@@ -28,9 +28,13 @@ class Book < ApplicationRecord
 
   def self.by_rating(order)
     if order == 'desc'
-      Book.joins(:reviews).order(rating: :desc)
+      Book.joins(:reviews).group(:id).order('avg(reviews.rating) desc')
     else
-      Book.joins(:reviews).order(rating: :asc)
+      books = []
+      books << Book.joins(:reviews).where('reviews = ?', nil)
+      books << Book.joins(:reviews).group(:id).order('avg(reviews.rating) asc')
+      books.flatten
+      binding.pry
     end
   end
 
