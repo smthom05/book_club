@@ -12,7 +12,7 @@
   <% @book.reviews.each do |review| %>
     <section id="review-<%= review.id %>">
       <p>Title:  <%= review.title %> </p>
-      <p>User Name:  <%= review.user.name %> </p>
+      <p>User Name:  <%= link_to review.user.name, user_path(review.user) %> </p>
       <p>Rating:  <%= review.rating %> </p>
       <p>Text:  <%= review.text %> </p>
     </section>
