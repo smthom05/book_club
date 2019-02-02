@@ -23,4 +23,15 @@ class Book < ApplicationRecord
   def number_of_reviews
     reviews.count
   end
+
+
+
+  def self.by_rating(order)
+    if order == 'desc'
+      Book.joins(:reviews).order(rating: :desc)
+    else
+      Book.joins(:reviews).order(rating: :asc)
+    end
+  end
+
 end
