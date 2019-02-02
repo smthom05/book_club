@@ -11,4 +11,16 @@ class Book < ApplicationRecord
   validates :year_published, presence: true, numericality: {
     greater_than_or_equal_to: 0, less_than_or_equal_to: 2019
   }
+
+  def average_rating
+    if reviews == []
+      "No reviews written"
+    else
+      reviews.average(:rating)
+    end
+  end
+
+  def number_of_reviews
+    reviews.count
+  end
 end
