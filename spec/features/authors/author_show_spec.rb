@@ -28,7 +28,6 @@ RSpec.describe 'author show page' do
       expect(page).to have_content("Year Published: #{@book_2.year_published}")
       expect(page).to have_css("img[src*='#{@book_2.image_url}']")
       expect(page).to_not have_content(@author.name)
-      save_and_open_page
     end
   end
 end

@@ -3,6 +3,10 @@ class BooksController < ApplicationController
     case params[:sort]
     when 'ratings'
       @books = Book.by_rating(params[:order])
+    when 'page count'
+      @books = Book.by_page_count(params[:order])
+    when 'number of reviews'
+      @books = Book.by_number_of_reviews(params[:order])
     else
       @books = Book.all
     end

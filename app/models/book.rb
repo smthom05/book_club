@@ -14,7 +14,7 @@ class Book < ApplicationRecord
 
   def average_rating
     if reviews == []
-      "No reviews written"
+      0
     else
       reviews.average(:rating)
     end
@@ -28,14 +28,25 @@ class Book < ApplicationRecord
 
   def self.by_rating(order)
     if order == 'desc'
-      Book.joins(:reviews).group(:id).order('avg(reviews.rating) desc')
+      Book.left_joins(:reviews).group(:id).order('avg(reviews.rating) desc')
     else
-      books = []
-      books << Book.joins(:reviews).where('reviews = ?', nil)
-      books << Book.joins(:reviews).group(:id).order('avg(reviews.rating) asc')
-      books.flatten
-      binding.pry
+      Book.left_joins(:reviews).group(:id).order('avg(reviews.rating) asc')
     end
   end
 
+  def self.by_page_count(order)
+    if order == "asc"
+      Book.order(:pages)
+    else
+      Book.order(pages: :desc)
+    end
+  end
+
+  def self.by_number_of_reviews(order)
+    if order == "asc"
+      Book.left_joins(:reviews).group(:id).order('reviews.count asc')
+    else
+      Book.left_joins(:reviews).group(:id).order('reviews.count desc')
+    end
+  end
 end

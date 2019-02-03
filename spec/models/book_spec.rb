@@ -32,9 +32,19 @@ RSpec.describe Book, type: :model do
       @book_3.reviews.create(title: "Review 1 Book 3", rating: 1, text: "Most fakest by far", user: @user)
     end
 
-    xit '.by_rating' do
+    it '.by_rating' do
       expect(Book.by_rating("asc")).to eq([@book_3, @book_1, @book_2])
       expect(Book.by_rating("desc")).to eq([@book_2, @book_1, @book_3])
+    end
+
+    it '.by_page_count' do
+      expect(Book.by_page_count("asc")).to eq([@book_2, @book_3, @book_1])
+      expect(Book.by_page_count("desc")).to eq([@book_1, @book_3, @book_2])
+    end
+
+    it '.by_number_of_reviews' do
+      expect(Book.by_number_of_reviews("asc")).to eq([@book_3, @book_1, @book_2])
+      expect(Book.by_number_of_reviews("desc")).to eq([@book_2, @book_1, @book_3])
     end
   end
 
@@ -56,7 +66,7 @@ RSpec.describe Book, type: :model do
     it '.average_rating' do
       expect(@book_1.average_rating).to eq(3)
       expect(@book_2.average_rating).to eq(2)
-      expect(@book_3.average_rating).to eq("No reviews written")
+      expect(@book_3.average_rating).to eq(0)
     end
 
     it '.number_of_reviews' do

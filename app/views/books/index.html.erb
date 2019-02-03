@@ -1,5 +1,10 @@
 <nav id="sorting-links">
   <%= link_to "Average Rating Ascending", books_path(sort: "ratings", order: "asc") %>
+  <%= link_to "Average Rating Descending", books_path(sort: "ratings", order: "desc") %>
+  <%= link_to "Page Count Ascending", books_path(sort: "page count", order: "asc") %>
+  <%= link_to "Page Count Descending", books_path(sort: "page count", order: "desc") %>
+  <%= link_to "Number of Reviews Ascending", books_path(sort: "number of reviews", order: "asc") %>
+  <%= link_to "Number of Reviews Descending", books_path(sort: "number of reviews", order: "desc") %>
 </nav>
 
 <section id="books">

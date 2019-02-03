@@ -52,7 +52,7 @@ RSpec.describe 'user show page' do
         expect(page).to have_content(@user.reviews[0].rating)
         expect(page).to have_content(@book_1.title)
         expect(page).to have_css("img[src*='#{@book_1.image_url}']")
-        expect(page).to have_content("Date: 2019-02-02")
+        expect(page).to have_content("Date: 2019-02-03")
       end
 
       within "#review-#{@user.reviews[1].id}" do
@@ -61,7 +61,7 @@ RSpec.describe 'user show page' do
         expect(page).to have_content(@user.reviews[1].rating)
         expect(page).to have_content(@book_2.title)
         expect(page).to have_css("img[src*='#{@book_2.image_url}']")
-        expect(page).to have_content("Date: 2019-02-02")
+        expect(page).to have_content("Date: 2019-02-03")
       end
     end
   end
