@@ -64,5 +64,22 @@ RSpec.describe 'user show page' do
         expect(page).to have_content("Date: 2019-02-03")
       end
     end
+
+    it 'shows a book title that is a link to the book show page' do
+      visit new_book_review_path(@book_1)
+
+      fill_in "review[title]", with: "Great Book"
+      fill_in "review[user]", with: "Book luvr"
+      fill_in "review[text]", with: "This was a great book."
+      fill_in "review[rating]", with: 5
+
+      click_button "Create Review"
+
+      visit user_path(@user)
+
+      click_link "#{@book_1.title}"
+
+      expect(current_path).to eq(book_path(@book_1))
+    end
   end
 end

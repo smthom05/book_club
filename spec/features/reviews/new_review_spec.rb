@@ -35,5 +35,15 @@ RSpec.describe 'When the user clicks on new review button', type: :feature do
     expect(current_path).to eq(book_path(@book_1))
   end
 
+  it 're-renders the page if fields are empty' do
+    visit new_book_review_path(@book_1)
 
+    fill_in "review[title]", with: "Great Book"
+    fill_in "review[user]", with: "BookLuvr"
+    fill_in "review[rating]", with: 5
+
+    click_button "Create Review"
+
+    expect(page).to have_button("Create Review")
+  end
 end

@@ -1,7 +1,7 @@
 <% @user.reviews.each do |review| %>
   <section id="review-<%= review.id %>">
     <h3><%= review.title %></h3>
-    <h4><%= review.book.title %></h4>
+    <h4><%= link_to review.book.title, book_path(review.book) %></h4>
     <img src="<%= review.book.image_url %>" alt="<%= review.book.title %>">
     <p>Rating: <%= review.rating %></p>
     <p><%= review.text %></p>
