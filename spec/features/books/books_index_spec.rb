@@ -146,19 +146,12 @@ RSpec.describe 'when a visitor visits the books index page' do
     expect(page.all('.individual-book')[1]).to have_content(@book_2.title)
     expect(page.all('.individual-book')[2]).to have_content(@book_3.title)
   end
+
+  it 'shows a book title that is a link to the book show page' do
+    visit books_path
+
+    click_link "#{@book_1.title}"
+
+    expect(current_path).to eq(book_path(@book_1))
+  end
 end
-
-# As a Visitor,
-# When I visit the book index page,
-# Next to each book title, I see its average book rating
-# And I also see the total number of reviews for the book.
-
-# As a Visitor,
-# When I visit the book index page,
-# I should see one link each to sort the books by the following criteria:
-# - sorted by average rating in ascending order
-# - sorted by average rating in descending order
-# - sorted by number of pages in ascending order
-# - sorted by number of pages in descending order
-# - sorted by number of reviews in ascending order
-# - sorted by number of reviews in descending order

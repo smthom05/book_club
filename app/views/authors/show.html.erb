@@ -2,7 +2,7 @@
 
 <% @author.books.each do |book| %>
   <section id="book-<%= book.id %>">
-    <p><%= book.title %></p>
+    <p><%= link_to book.title, book_path(book) %></p>
     <img src="<%= book.image_url %>" alt="<%= book.id %>">
     <% book.authors.each do |author| %>
       <p><%= author.name unless author.name == @author.name %></p>

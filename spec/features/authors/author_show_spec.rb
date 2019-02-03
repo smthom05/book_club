@@ -30,4 +30,12 @@ RSpec.describe 'author show page' do
       expect(page).to_not have_content(@author.name)
     end
   end
+
+  it 'shows a book title that is a link to the book show page' do
+    visit author_path(@author)
+
+    click_link "#{@book_1.title}"
+
+    expect(current_path).to eq(book_path(@book_1))
+  end
 end
