@@ -40,4 +40,19 @@ RSpec.describe 'when a visitor visits a book show page' do
       expect(page).to have_content("User Name: #{user_2.name}")
     end
   end
+
+  it 'shows a link to delete a book and it that book no longer appears on book index page' do
+    author_1 = Author.create(name: "JRR Tolkien")
+    author_2 = Author.create(name: "JK Rowling")
+    book_1 = Book.create(authors: [author_1], title: "Lord of the Rings", pages: 1000, year_published: 1955, image_url: "https://upload.wikimedia.org/wikipedia/en/e/e9/First_Single_Volume_Edition_of_The_Lord_of_the_Rings.gif")
+    book_2 = Book.create(authors: [author_2], title: "The Prisoner of Azkaban", pages: 400, year_published: 1999, image_url: "https://images-na.ssl-images-amazon.com/images/I/81lAPl9Fl0L.jpg")
+
+    visit book_path(book_1)
+
+    click_link "Delete Book"
+
+    expect(current_path).to eq(books_path)
+    expect(page).to have_content(book_2.title)
+    expect(page).to_not have_content(book_1.title)
+  end
 end
