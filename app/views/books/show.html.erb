@@ -8,6 +8,8 @@
   <img src="<%= @book.image_url %>" alt="<%= @book.title %>">
   <p>Pages: <%= @book.pages %></p>
   <p>Year Published: <%= @book.year_published %></p>
+  
+  <p> <%= link_to "Add New Review", new_book_review_path(@book) %> </p>
 
   <% @book.reviews.each do |review| %>
     <section id="review-<%= review.id %>">
