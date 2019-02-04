@@ -8,7 +8,7 @@ RSpec.describe 'author show page' do
     @book_2 = Book.create(authors: [@author, @author_2], title: "Towers", pages: 300, year_published: 1955, image_url: "https://images-na.ssl-images-amazon.com/images/I/4123zOAwAgL.jpg")
     @book_3 = Book.create(authors: [@author, @author_2], title: "King", pages: 500, year_published: 1956, image_url: "https://images-na.ssl-images-amazon.com/images/I/41fHC5yiRgL.jpg")
     @book_4 = Book.create(authors: [@author], title: "Something", pages: 200, year_published: 1957)
-    @book_5 = Book.create(authors: [@author_2], title: "Something else", pages: 100, year_published: 1958)
+    @book_5 = Book.create(authors: [@author_2], title: "Book 5", pages: 100, year_published: 1958)
   end
 
   it 'shows me all books by the author' do
