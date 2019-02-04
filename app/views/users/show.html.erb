@@ -6,5 +6,6 @@
     <p>Rating: <%= review.rating %></p>
     <p><%= review.text %></p>
     <p>Date: <%= review.created_at %></p>
+    <%= link_to "Delete Review", review_path(review), method: :delete %>
   </section>
 <% end %>

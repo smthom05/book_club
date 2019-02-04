@@ -9,5 +9,7 @@ Rails.application.routes.draw do
 
   resources :authors
 
+  resources :reviews, only: [:destroy]
+
   resources :users, only: [:show]
 end
