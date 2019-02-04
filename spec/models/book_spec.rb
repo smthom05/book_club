@@ -56,11 +56,11 @@ RSpec.describe Book, type: :model do
       @book_2 = Book.create(authors: [@author_2], title: "The Prisoner of Azkaban", pages: 400, year_published: 1999, image_url: "https://images-na.ssl-images-amazon.com/images/I/81lAPl9Fl0L.jpg")
       @book_3 = Book.create(title: "LOTR MEETS HARRY POTTER", authors: [@author_1, @author_2], pages: 500, year_published: 2019, image_url: "https://upload.wikimedia.org/wikipedia/en/e/e9/First_Single_Volume_Edition_of_The_Lord_of_the_Rings.gif")
       @user = User.create(name: "user")
-      @book_1.reviews.create(title: "Review 1", rating: 5, text: "Fake", user: @user)
-      @book_1.reviews.create(title: "Review 2", rating: 1, text: "Other", user: @user)
-      @book_2.reviews.create(title: "Review 1 Book 2", rating: 3, text: "Faker", user: @user)
-      @book_2.reviews.create(title: "Review 2 Book 2", rating: 1, text: "Fakest", user: @user)
-      @book_2.reviews.create(title: "Review 3 Book 2", rating: 2, text: "Fakest by far", user: @user)
+      @review_1 = @book_1.reviews.create(title: "Review 1", rating: 5, text: "Fake", user: @user)
+      @review_2 = @book_1.reviews.create(title: "Review 2", rating: 1, text: "Other", user: @user)
+      @review_3 = @book_2.reviews.create(title: "Review 1 Book 2", rating: 3, text: "Faker", user: @user)
+      @review_4 = @book_2.reviews.create(title: "Review 2 Book 2", rating: 1, text: "Fakest", user: @user)
+      @review_5 = @book_2.reviews.create(title: "Review 3 Book 2", rating: 2, text: "Fakest by far", user: @user)
     end
 
     it '.average_rating' do
@@ -74,6 +74,10 @@ RSpec.describe Book, type: :model do
       expect(@book_2.number_of_reviews).to eq(3)
       expect(@book_3.number_of_reviews).to eq(0)
     end
-  end
 
+    it '.top_review' do
+      expect(@book_1.top_review).to eq(@review_1)
+      expect(@book_2.top_review).to eq(@review_3)
+    end
+  end
 end
