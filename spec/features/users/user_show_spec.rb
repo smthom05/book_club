@@ -9,6 +9,8 @@ RSpec.describe 'user show page' do
       author_2 = Author.create(name: "JK Rowling")
       @book_2 = Book.create(authors: [author_2], title: "The Prisoner of Azkaban", pages: 400, year_published: 1999, image_url: "https://images-na.ssl-images-amazon.com/images/I/81lAPl9Fl0L.jpg")
       @review = @book_1.reviews.create(title: "Review Example", rating: 5, text: "jfadlskjf;kf", user: @user)
+      @review_2 = @book_1.reviews.create(title: "Cool Book", rating: 5, text: "Cool", user: @user)
+      @review_3 = @book_2.reviews.create(title: "Crappy Book", rating: 1, text: "Crappy", user: @user)
     end
 
     it 'takes me to a users show page' do
@@ -22,16 +24,7 @@ RSpec.describe 'user show page' do
     end
 
     it 'shows me all the users reviews' do
-      visit new_book_review_path(@book_2)
-
-      fill_in "review[title]", with: "Best Book"
-      fill_in "review[user]", with: "Book luvr"
-      fill_in "review[text]", with: "This was fine."
-      fill_in "review[rating]", with: 3
-
-      click_button "Create Review"
-
-      click_link "Book Luvr"
+      visit user_path(@user)
 
       within "#review-#{@user.reviews[0].id}" do
         expect(page).to have_content(@user.reviews[0].title)
@@ -42,10 +35,10 @@ RSpec.describe 'user show page' do
         expect(page).to have_content(@book_1.created_at)
       end
 
-      within "#review-#{@user.reviews[1].id}" do
-        expect(page).to have_content(@user.reviews[1].title)
-        expect(page).to have_content(@user.reviews[1].text)
-        expect(page).to have_content(@user.reviews[1].rating)
+      within "#review-#{@user.reviews[2].id}" do
+        expect(page).to have_content(@user.reviews[2].title)
+        expect(page).to have_content(@user.reviews[2].text)
+        expect(page).to have_content(@user.reviews[2].rating)
         expect(page).to have_content(@book_2.title)
         expect(page).to have_css("img[src*='#{@book_2.image_url}']")
         expect(page).to have_content(@book_2.created_at)
@@ -71,6 +64,22 @@ RSpec.describe 'user show page' do
 
       expect(current_path).to eq(user_path(@user))
       expect(page).to_not have_content(@review.title)
+    end
+
+    it 'shows a link to sort in chronological order (newest and oldest)' do
+      visit user_path(@user)
+
+      click_link "Sort By Newest"
+    
+      expect(page.all('.individual-review')[0]).to have_content(@review_3.title)
+      expect(page.all('.individual-review')[1]).to have_content(@review_2.title)
+      expect(page.all('.individual-review')[2]).to have_content(@review.title)
+
+      click_link "Sort By Oldest"
+
+      expect(page.all('.individual-review')[0]).to have_content(@review.title)
+      expect(page.all('.individual-review')[1]).to have_content(@review_2.title)
+      expect(page.all('.individual-review')[2]).to have_content(@review_3.title)
     end
   end
 end
