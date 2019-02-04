@@ -3,4 +3,7 @@ class User < ApplicationRecord
 
   validates_presence_of :name
 
+  def newest_reviews_first
+    reviews.order(created_at: :desc)
+  end
 end

@@ -1,5 +1,8 @@
-<% @user.reviews.each do |review| %>
-  <section id="review-<%= review.id %>">
+<p> <%= link_to "Sort By Newest", user_path(@user, order: "new") %> </p>
+<p> <%= link_to "Sort By Oldest", user_path(@user) %> </p>
+
+<% @reviews.each do |review| %>
+  <section class= 'individual-review' id="review-<%= review.id %>">
     <h3><%= review.title %></h3>
     <h4><%= link_to review.book.title, book_path(review.book) %></h4>
     <img src="<%= review.book.image_url %>" alt="<%= review.book.title %>">
