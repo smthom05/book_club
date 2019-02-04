@@ -17,7 +17,7 @@
       <img src="<%= book.image_url %>" alt="<%= book.title %>">
 
       <% book.authors.each do |author|%>
-        <p> <%= author.name %> </p>
+        <p> <%= link_to author.name, author_path(author) %> </p>
       <% end %>
 
       <p>Page Count: <%= book.pages %></p>
