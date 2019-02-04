@@ -24,6 +24,10 @@ class Book < ApplicationRecord
     reviews.count
   end
 
+  def top_review
+    reviews.order(rating: :desc).first
+  end
+
   def self.by_rating(order)
     if order == 'desc'
       Book.left_joins(:reviews).group(:id).order('avg(reviews.rating) desc')
