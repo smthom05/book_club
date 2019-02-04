@@ -46,6 +46,14 @@ class BooksController < ApplicationController
     end
   end
 
+  def destroy
+    Review.where(book_id: params[:id]).destroy_all
+    BookAuthor.where(book_id: params[:id]).destroy_all
+    Book.find(params[:id]).destroy
+
+    redirect_to books_path
+  end
+
   private
   def book_params
     params.require(:book).permit(:title, :authors, :pages, :year_published, :image_url)
