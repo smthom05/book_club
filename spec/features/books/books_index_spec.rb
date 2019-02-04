@@ -154,4 +154,14 @@ RSpec.describe 'when a visitor visits the books index page' do
 
     expect(current_path).to eq(book_path(@book_1))
   end
+
+  it 'shows author name as a link that goes to author show page' do
+    visit books_path
+
+    within "#book-#{@book_1.id}" do
+      click_link "#{@author_1.name}"
+    end
+
+    expect(current_path).to eq(author_path(@author_1))
+  end
 end
