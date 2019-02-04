@@ -6,6 +6,16 @@ RSpec.describe 'When the user clicks on new review button', type: :feature do
     @book_1 = Book.create(authors: [author_1], title: "Lord of the Rings", pages: 1000, year_published: 1955, image_url: "https://upload.wikimedia.org/wikipedia/en/e/e9/First_Single_Volume_Edition_of_The_Lord_of_the_Rings.gif")
   end
 
+  it 'shows me a button on the book show page to add a new review' do
+    visit book_path(@book_1)
+
+    click_link "Add New Review"
+
+    expect(current_path).to eq(new_book_review_path(@book_1))
+  end
+
+
+
   it 'shows me a form where a user can enter review title, user name, rating and text' do
 
 
