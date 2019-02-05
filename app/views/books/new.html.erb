@@ -9,22 +9,23 @@
 <% if @error_msg %>
   <h1> <%= @error_msg %> </h1>
 <% end %>
+<section id="new-book-form-wrapper">
+  <%= form_for @book do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %><br>
 
-<%= form_for @book do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+    <label>Author(s):</label>
+    <input type="text" value="" name="book[authors]" id="book_authors"><br>
 
-  <p>Author(s):</p>
-  <input type="text" value="" name="book[authors]" id="book_authors">
+    <%= f.label :pages %>
+    <%= f.number_field :pages %><br>
 
-  <%= f.label :pages %>
-  <%= f.number_field :pages %>
+    <%= f.label :year_published %>
+    <%= f.number_field :year_published %><br>
 
-  <%= f.label :year_published %>
-  <%= f.number_field :year_published %>
+    <%= f.label :image_url %>
+    <%= f.text_field :image_url %><br>
 
-  <%= f.label :image_url %>
-  <%= f.text_field :image_url %>
-
-  <%= f.submit %>
-<% end %>
+    <%= f.submit %>
+  <% end %>
+</section>

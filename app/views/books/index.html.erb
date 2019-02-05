@@ -24,7 +24,7 @@
 
   <section id="most-active-users">
     <% @top_users.each do |user| %>
-      <p><%= user.name %></p>
+      <p><%= link_to user.name, user_path(user) %></p>
       <p>Review Count: <%= user.number_of_reviews %></p>
     <% end %>
   </section>
