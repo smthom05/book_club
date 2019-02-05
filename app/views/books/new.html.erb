@@ -9,8 +9,10 @@
 <% if @error_msg %>
   <h1> <%= @error_msg %> </h1>
 <% end %>
-<section id="new-book-form-wrapper">
+<section class="form-wrapper" id="new-book-form-wrapper">
+
   <%= form_for @book do |f| %>
+  <h3>Add A New Book:</h3>
     <%= f.label :title %>
     <%= f.text_field :title %><br>
 

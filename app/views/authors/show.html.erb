@@ -1,26 +1,32 @@
-<h3><%= @author.name %></h3>
-
-</section>
-<% @author.books.each do |book| %>
-  <section id="book-<%= book.id %>">
-    <p><%= link_to book.title, book_path(book) %></p>
-    <img src="<%= book.image_url %>" alt="<%= book.id %>">
-    <% book.authors.each do |author| %>
-      <p><%= author.name unless author.name == @author.name %></p>
-    <% end %>
-    <p>Page Count: <%= book.pages %></p>
-    <p>Year Published: <%= book.year_published %></p>
-
-    <section id="top-review-<%= book.id %>">
-      <h5>Top Review</h5>
-      <% if book.reviews.count > 0 %>
-        <p> <%= book.top_review.title %> </p>
-        <p> <%= book.top_review.rating %> </p>
-        <p> <%= link_to book.top_review.user.name, user_path(book.top_review.user) %> </p>
-      <% else %>
-        <p>No Reviews Written</p>
-      <% end %>
-    </section>
+<section id="author-show-wrapper">
+  <section id="author-name">
+    <h3><%= @author.name %></h3>
+    <%= link_to "Delete Author", author_path(@author), method: :delete %>
   </section>
-<% end %>
-<%= link_to "Delete Author", author_path(@author), method: :delete %>
+
+  <% @author.books.each do |book| %>
+    <section class="ind-book-wrapper">
+      <section class="book-section" id="book-<%= book.id %>">
+        <p id="book-title"><%= link_to book.title, book_path(book) %></p>
+        <img src="<%= book.image_url %>" alt="<%= book.id %>">
+        <p>Additional Author(s) (if any):</p>
+        <% book.authors.each do |author| %>
+          <p><%= link_to author.name, author_path(author) unless author.name == @author.name %></p>
+        <% end %>
+        <p>Page Count: <%= book.pages %></p>
+        <p>Year Published: <%= book.year_published %></p>
+      </section>
+
+      <section class="top-review" id="top-review-<%= book.id %>">
+        <h5>Top Review</h5>
+        <% if book.reviews.count > 0 %>
+          <p>Title: <%= book.top_review.title %> </p>
+          <p>Rating: <%= book.top_review.rating %> </p>
+          <p>User Name: <%= link_to book.top_review.user.name, user_path(book.top_review.user) %> </p>
+        <% else %>
+          <p>No Reviews Written</p>
+        <% end %>
+      </section>
+    </section>
+  <% end %>
+</section>
