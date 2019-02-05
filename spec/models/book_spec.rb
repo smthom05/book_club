@@ -61,23 +61,32 @@ RSpec.describe Book, type: :model do
       @review_3 = @book_2.reviews.create(title: "Review 1 Book 2", rating: 3, text: "Faker", user: @user)
       @review_4 = @book_2.reviews.create(title: "Review 2 Book 2", rating: 1, text: "Fakest", user: @user)
       @review_5 = @book_2.reviews.create(title: "Review 3 Book 2", rating: 2, text: "Fakest by far", user: @user)
+      @review_6 = @book_2.reviews.create(title: "Review 4 Book 2", rating: 5, text: "Fakest by far", user: @user)
+
     end
 
     it '.average_rating' do
       expect(@book_1.average_rating).to eq(3)
-      expect(@book_2.average_rating).to eq(2)
       expect(@book_3.average_rating).to eq(0)
     end
 
     it '.number_of_reviews' do
       expect(@book_1.number_of_reviews).to eq(2)
-      expect(@book_2.number_of_reviews).to eq(3)
+      expect(@book_2.number_of_reviews).to eq(4)
       expect(@book_3.number_of_reviews).to eq(0)
     end
 
     it '.top_review' do
       expect(@book_1.top_review).to eq(@review_1)
-      expect(@book_2.top_review).to eq(@review_3)
+      expect(@book_2.top_review).to eq(@review_6)
+    end
+
+    it '.top_reviews' do
+      expect(@book_2.top_reviews).to eq([@review_6, @review_3, @review_5])
+    end
+
+    it '.bottom_reviews' do
+      expect(@book_2.bottom_reviews).to eq([@review_4, @review_5, @review_3])
     end
   end
 end

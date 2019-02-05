@@ -51,4 +51,12 @@ class Book < ApplicationRecord
       Book.left_joins(:reviews).group(:id).order('reviews.count desc')
     end
   end
+
+  def top_reviews
+    reviews.order(rating: :desc).limit(3)
+  end
+
+  def bottom_reviews
+    reviews.order(:rating).limit(3)
+  end
 end
