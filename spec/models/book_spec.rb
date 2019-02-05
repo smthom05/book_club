@@ -46,6 +46,16 @@ RSpec.describe Book, type: :model do
       expect(Book.by_number_of_reviews("asc")).to eq([@book_3, @book_1, @book_2])
       expect(Book.by_number_of_reviews("desc")).to eq([@book_2, @book_1, @book_3])
     end
+
+    it '.top_rated_books' do
+      @book_4 = Book.create(authors: [@author_2], title: "The Chamber baby", pages: 100, year_published: 456, image_url: "https://images-na.ssl-images-amazon.com/images/I/81lAPl9Fl0L.jpg")
+      expect(Book.top_rated_books).to eq([@book_2, @book_1, @book_3])
+    end
+
+    it '.lowest_rated_books' do
+      @book_4 = Book.create(authors: [@author_2], title: "The Chamber baby", pages: 100, year_published: 456, image_url: "https://images-na.ssl-images-amazon.com/images/I/81lAPl9Fl0L.jpg")
+      expect(Book.lowest_rated_books).to eq([@book_3, @book_1, @book_2])
+    end
   end
 
   describe 'instance methods' do
@@ -62,7 +72,6 @@ RSpec.describe Book, type: :model do
       @review_4 = @book_2.reviews.create(title: "Review 2 Book 2", rating: 1, text: "Fakest", user: @user)
       @review_5 = @book_2.reviews.create(title: "Review 3 Book 2", rating: 2, text: "Fakest by far", user: @user)
       @review_6 = @book_2.reviews.create(title: "Review 4 Book 2", rating: 5, text: "Fakest by far", user: @user)
-
     end
 
     it '.average_rating' do

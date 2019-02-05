@@ -12,22 +12,6 @@ class Book < ApplicationRecord
     greater_than_or_equal_to: 0, less_than_or_equal_to: 2019
   }
 
-  def average_rating
-    if reviews == []
-      0
-    else
-      reviews.average(:rating)
-    end
-  end
-
-  def number_of_reviews
-    reviews.count
-  end
-
-  def top_review
-    reviews.order(rating: :desc).first
-  end
-
   def self.by_rating(order)
     if order == 'desc'
       Book.left_joins(:reviews).group(:id).order('avg(reviews.rating) desc')
@@ -50,6 +34,30 @@ class Book < ApplicationRecord
     else
       Book.left_joins(:reviews).group(:id).order('reviews.count desc')
     end
+  end
+
+  def self.top_rated_books
+    Book.joins(:reviews).group(:id).order('avg(reviews.rating) desc').limit(3)
+  end
+
+  def self.lowest_rated_books
+    Book.joins(:reviews).group(:id).order('avg(reviews.rating) asc').limit(3)
+  end
+
+  def average_rating
+    if reviews == []
+      0
+    else
+      reviews.average(:rating).round(2)
+    end
+  end
+
+  def number_of_reviews
+    reviews.count
+  end
+
+  def top_review
+    reviews.order(rating: :desc).first
   end
 
   def top_reviews

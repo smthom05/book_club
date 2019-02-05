@@ -7,6 +7,29 @@
   <%= link_to "Number of Reviews Descending", books_path(sort: "number of reviews", order: "desc") %>
 </nav>
 
+<section id="all-book-statistics">
+  <section id="highest-rated-books">
+    <% @top_rated_books.each do |book| %>
+      <p><%= book.title %></p>
+      <p>Rating: <%= book.average_rating %></p>
+    <% end %>
+  </section>
+
+  <section id="lowest-rated-books">
+    <% @lowest_rated_books.each do |book| %>
+      <p><%= book.title %></p>
+      <p>Rating: <%= book.average_rating %></p>
+    <% end %>
+  </section>
+
+  <section id="most-active-users">
+    <% @top_users.each do |user| %>
+      <p><%= user.name %></p>
+      <p>Review Count: <%= user.number_of_reviews %></p>
+    <% end %>
+  </section>
+</section>
+
 <section id="books">
   <h3>All Books</h3>
 

@@ -164,4 +164,71 @@ RSpec.describe 'when a visitor visits the books index page' do
 
     expect(current_path).to eq(author_path(@author_1))
   end
+
+  describe 'within the statistics section' do
+    before :each do
+      @user_2 = User.create(name: "dumb")
+      @user_3 = User.create(name: "fan")
+      @user_4 = User.create(name: "lame")
+      @book_4 = Book.create(title: "Good book", authors: [@author_2], pages: 90, year_published: 5)
+      @review_4 = @book_3.reviews.create(title: "Review 1", rating: 5, text: "Fake", user: @user_2)
+      @review_5 = @book_4.reviews.create(title: "Review fds", rating: 3, text: "Other", user: @user_2)
+      @review_6 = @book_4.reviews.create(title: "Review fwff", rating: 5, text: "Faker", user: @user_3)
+      @review_7 = @book_3.reviews.create(title: "Reldasf", rating: 4, text: "Faker", user: @user_4)
+      @review_8 = @book_4.reviews.create(title: "Rfhjfhjkfhkjf", rating: 3, text: "Faker", user: @user_3)
+    end
+
+    it 'shows the top 3 highest rated books' do
+      visit books_path
+
+      within '#all-book-statistics' do
+        within '#highest-rated-books' do
+          expect(page).to have_content(@book_3.title)
+          expect(page).to have_content("Rating: #{@book_3.average_rating}")
+
+          expect(page).to have_content(@book_4.title)
+          expect(page).to have_content("Rating: #{@book_4.average_rating}")
+
+          expect(page).to have_content(@book_2.title)
+          expect(page).to have_content("Rating: #{@book_2.average_rating}")
+        end
+      end
+    end
+
+    it 'shows the top 3 highest rated books' do
+      visit books_path
+
+      within '#all-book-statistics' do
+        within '#lowest-rated-books' do
+          expect(page).to have_content(@book_1.title)
+          expect(page).to have_content("Rating: #{@book_1.average_rating}")
+
+          expect(page).to have_content(@book_2.title)
+          expect(page).to have_content("Rating: #{@book_2.average_rating}")
+
+          expect(page).to have_content(@book_4.title)
+          expect(page).to have_content("Rating: #{@book_4.average_rating}")
+        end
+      end
+    end
+
+    it 'shows the 3 users with the most reviews' do
+      @book_3.reviews.create(title: "Review 8", rating: 5, text: "Fake", user: @user_2)
+
+      visit books_path
+
+      within '#all-book-statistics' do
+        within '#most-active-users' do
+          expect(page).to have_content(@user.name)
+          expect(page).to have_content("Review Count: #{@user.number_of_reviews}")
+
+          expect(page).to have_content(@user_2.name)
+          expect(page).to have_content("Review Count: #{@user_2.number_of_reviews}")
+
+          expect(page).to have_content(@user_3.name)
+          expect(page).to have_content("Review Count: #{@user_3.number_of_reviews}")
+        end
+      end
+    end
+  end
 end
