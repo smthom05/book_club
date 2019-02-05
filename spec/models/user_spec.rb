@@ -33,6 +33,7 @@ RSpec.describe User, type: :model do
     end
 
     it '.top_users' do
+      @book_2.reviews.create(title: "ghfkjgsfhjk", rating: 5, text: "I hate books", user: @user_2)
       expect(User.top_users).to eq([@user, @user_2, @user_3])
     end
   end
