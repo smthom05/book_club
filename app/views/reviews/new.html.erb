@@ -1,15 +1,17 @@
-<%= form_for [@book, @review] do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+<section class="form-wrapper" id="new-review-form-wrapper">
+  <%= form_for [@book, @review] do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %><br>
 
-  <%= f.label :user %>
-  <%= f.text_field :user %>
+    <%= f.label :user %>
+    <%= f.text_field :user %><br>
 
-  <%= f.label :rating %>
-  <%= f.number_field :rating %>
+    <%= f.label :rating %>
+    <%= f.number_field :rating %><br>
 
-  <%= f.label :text %>
-  <%= f.text_field :text %>
+    <%= f.label :text %>
+    <%= f.text_field :text %><br>
 
-  <%= f.submit %>
-<% end %>
+    <%= f.submit %>
+  <% end %>
+</section>
