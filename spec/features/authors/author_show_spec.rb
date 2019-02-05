@@ -73,17 +73,17 @@ RSpec.describe 'author show page' do
   it 'should show me the highest rated review' do
     visit author_path(@author)
 
-    within "#book-#{@book_1.id}" do
+    within "#top-review-#{@book_1.id}" do
       expect(page).to have_content(@review.title)
       expect(page).to have_content(@review.rating)
       expect(page).to have_content(@review.user.name)
     end
-    within "#book-#{@book_2.id}" do
+    within "#top-review-#{@book_2.id}" do
       expect(page).to have_content(@review_3.title)
       expect(page).to have_content(@review_3.rating)
       expect(page).to have_content(@review_3.user.name)
     end
-    within "#book-#{@book_4.id}" do
+    within "#top-review-#{@book_4.id}" do
       expect(page).to have_content("No Reviews Written")
     end
 
