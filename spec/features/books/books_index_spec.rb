@@ -230,5 +230,17 @@ RSpec.describe 'when a visitor visits the books index page' do
         end
       end
     end
+
+    it 'shows a user name which is a link to that user show page' do
+      visit books_path
+
+      within '#all-book-statistics' do
+        within '#most-active-users' do
+          click_link "#{@user.name}"
+        end
+      end
+
+      expect(current_path).to eq(user_path(@user))
+    end
   end
 end
