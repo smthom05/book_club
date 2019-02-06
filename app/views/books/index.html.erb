@@ -1,17 +1,17 @@
-<nav id="sorting-links">
+<section id="sorting-links">
   <%= link_to "Average Rating Ascending", books_path(sort: "ratings", order: "asc") %>
   <%= link_to "Average Rating Descending", books_path(sort: "ratings", order: "desc") %>
   <%= link_to "Page Count Ascending", books_path(sort: "page count", order: "asc") %>
   <%= link_to "Page Count Descending", books_path(sort: "page count", order: "desc") %>
   <%= link_to "Number of Reviews Ascending", books_path(sort: "number of reviews", order: "asc") %>
   <%= link_to "Number of Reviews Descending", books_path(sort: "number of reviews", order: "desc") %>
-</nav>
+</section>
 
 <section id="all-book-statistics">
   <section id="highest-rated-books">
     <h2>Top Rated Books</h2>
     <% @top_rated_books.each do |book| %>
-      <p><%= book.title %></p>
+      <p><%= link_to book.title, book_path(book) %></p>
       <p>Rating: <%= book.average_rating %></p>
     <% end %>
   </section>
@@ -19,7 +19,7 @@
   <section id="lowest-rated-books">
     <h2>Lowest Rated Books</h2>
     <% @lowest_rated_books.each do |book| %>
-      <p><%= book.title %></p>
+      <p><%= link_to book.title, book_path(book) %></p>
       <p>Rating: <%= book.average_rating %></p>
     <% end %>
   </section>
@@ -39,7 +39,7 @@
   <% @books.each do |book| %>
 
     <section class="individual-book" id="book-<%= book.id %>">
-      <section class='book-image'>
+      <section id='book-image'>
         <p><%= link_to book.title, book_path(book) %></p><br>
         <img src="<%= book.image_url %>" alt="<%= book.title %>">
       </section>
@@ -54,7 +54,7 @@
         <p>Average Rating: <%= book.average_rating %></p>
         <p>Number of reviews: <%= book.number_of_reviews %></p>
       </section>
-      
+
     </section>
   <% end %>
 </section>

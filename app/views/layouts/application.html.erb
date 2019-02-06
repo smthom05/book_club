@@ -10,9 +10,10 @@
 
   <body>
     <nav>
-      <%= link_to "Home", root_path %>
-      <%= link_to "Books", books_path %>
+      <h1>Book Club </h1>
       <%= link_to "Add New Book", new_book_path %>
+      <%= link_to "Books", books_path %>
+      <%= link_to "Home", root_path %>
     </nav>
     <%= yield %>
   </body>

@@ -47,7 +47,9 @@ RSpec.describe 'when a visitor visits the books index page' do
 
     visit books_path
 
-    click_link(@book_1.title)
+    within "#book-#{@book_1.id}" do
+      click_link(@book_1.title)
+    end
 
     expect(current_path).to eq(book_path(@book_1))
   end
@@ -150,7 +152,9 @@ RSpec.describe 'when a visitor visits the books index page' do
   it 'shows a book title that is a link to the book show page' do
     visit books_path
 
-    click_link "#{@book_1.title}"
+    within '#highest-rated-books' do
+      click_link "#{@book_1.title}"
+    end
 
     expect(current_path).to eq(book_path(@book_1))
   end
