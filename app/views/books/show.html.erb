@@ -1,6 +1,6 @@
 <section id="book-show-wrapper">
   <section class="book" id="book-<%= @book.id %>">
-    <p>Title: <%= @book.title %></p>
+    <h1><%= @book.title %></h1>
     <p>Author(s):
       <% @book.authors.each do |author| %>
         <%= link_to author.name, author_path(author) %>
@@ -20,7 +20,7 @@
     <h3 id="average-rating">Average Rating: <%= @book.average_rating %></h3><br>
 
     <h4>Top Rated Reviews:</h4>
-    <% @top_reviews.each do |review| if @top_reviews %>
+    <% @top_reviews.each do |review| %>
       <div class="review-stats" id="top-review-<%= review.id %>">
         <h5>Title: <%= review.title %></h5>
         <p>Rating: <%= review.rating %></p>
@@ -30,7 +30,7 @@
     <br>
 
     <h4>Lowest Rated Reviews:</h4>
-    <% @bottom_reviews.each do |review| if @bottom_reviews %>
+    <% @bottom_reviews.each do |review| %>
       <div class="review-stats" id="bottom-review-<%= review.id %>">
         <h5>Title: <%= review.title %></h5>
         <p>Rating: <%= review.rating %></p>
@@ -42,7 +42,7 @@
 
 <section id="reviews">
   <h2 id="reviews-header">Reviews: </h2>
-  <% @book.reviews.each do |review| if @book.reviews %>
+  <% @book.reviews.each do |review| %>
     <section class="review" id="review-<%= review.id %>">
       <p>Title:  <%= review.title %> </p>
       <p>User Name:  <%= link_to review.user.name, user_path(review.user) %> </p>
