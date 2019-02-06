@@ -9,6 +9,7 @@
 
 <section id="all-book-statistics">
   <section id="highest-rated-books">
+    <h2>Top Rated Books</h2>
     <% @top_rated_books.each do |book| %>
       <p><%= book.title %></p>
       <p>Rating: <%= book.average_rating %></p>
@@ -16,6 +17,7 @@
   </section>
 
   <section id="lowest-rated-books">
+    <h2>Lowest Rated Books</h2>
     <% @lowest_rated_books.each do |book| %>
       <p><%= book.title %></p>
       <p>Rating: <%= book.average_rating %></p>
@@ -23,6 +25,7 @@
   </section>
 
   <section id="most-active-users">
+    <h2>Most Active Users</h2>
     <% @top_users.each do |user| %>
       <p><%= link_to user.name, user_path(user) %></p>
       <p>Review Count: <%= user.number_of_reviews %></p>
@@ -36,17 +39,22 @@
   <% @books.each do |book| %>
 
     <section class="individual-book" id="book-<%= book.id %>">
-      <p><%= link_to book.title, book_path(book) %></p>
-      <img src="<%= book.image_url %>" alt="<%= book.title %>">
+      <section class='book-image'>
+        <p><%= link_to book.title, book_path(book) %></p><br>
+        <img src="<%= book.image_url %>" alt="<%= book.title %>">
+      </section>
 
-      <% book.authors.each do |author|%>
-        <p> <%= link_to author.name, author_path(author) %> </p>
-      <% end %>
+      <section class='book-info'>
+        <% book.authors.each do |author|%>
+          <p> <%= link_to author.name, author_path(author) %> </p>
+        <% end %>
 
-      <p>Page Count: <%= book.pages %></p>
-      <p>Year Published: <%= book.year_published %></p>
-      <p>Average Rating: <%= book.average_rating %></p>
-      <p>Number of reviews: <%= book.number_of_reviews %></p>
+        <p>Page Count: <%= book.pages %></p>
+        <p>Year Published: <%= book.year_published %></p>
+        <p>Average Rating: <%= book.average_rating %></p>
+        <p>Number of reviews: <%= book.number_of_reviews %></p>
+      </section>
+      
     </section>
   <% end %>
 </section>
