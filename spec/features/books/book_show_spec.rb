@@ -9,7 +9,7 @@ RSpec.describe 'when a visitor visits a book show page' do
 
     visit book_path(book_1)
 
-    expect(page).to have_content("Title: #{book_1.title}")
+    expect(page).to have_content(book_1.title)
     expect(page).to have_content("Author(s): #{book_1.authors.first.name}")
     expect(page).to have_content("Pages: #{book_1.pages}")
     expect(page).to have_content("Year Published: #{book_1.year_published}")
